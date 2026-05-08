@@ -1,0 +1,120 @@
+<h2>タスク一覧</h2>
+
+<div class="legend-wrapper">
+<ul class="legend">
+  <li><span class="dot def"></span> 登録されたタスク</li>
+  <li><span class="dot yellow"></span> 通知期限が到来しているタスク</li>
+  <li><span class="dot red"></span> 期限超過しているタスク</li>
+</ul>
+</div>
+
+<div *ngIf="showConfirm" class="modal-overlay">
+  <div class="modal">
+    <p>
+      タスクは期限と重要性、またはあなたの指定順に並んでいます。<br>
+      並び替えますか？
+    </p>
+    <button (click)="confirmReorder()">並べ替える</button>
+    <button (click)="cancelReorder()">キャンセル</button>
+  </div>
+</div>
+
+<div *ngIf="board as b" class="matrix">
+  <!-- 未着手 -->
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="b.todo"
+    [cdkDropListConnectedTo]="[pendingList, doingList, doneList]"
+    class="column"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <h3>未着手</h3>
+    <div
+      *ngFor="let task of b.todo; trackBy: trackById"
+      class="task-card"
+    >
+    <app-task-icon 
+    [task]="task" 
+    (taskClick)="openEditModal($event)"
+    column="todo"></app-task-icon>
+
+    </div>
+  </div>
+
+  <!-- 保留 -->
+  <div
+    cdkDropList
+    #pendingList="cdkDropList"
+    [cdkDropListData]="b.pending"
+    [cdkDropListConnectedTo]="[todoList, doingList, doneList]"
+    class="column"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <h3>保留</h3>
+    <div
+      *ngFor="let task of b.pending; trackBy: trackById"
+      class="task-card"
+    >
+    <app-task-icon 
+    [task]="task" 
+    (taskClick)="openEditModal($event)"
+    column="pending"></app-task-icon>
+
+    </div>
+  </div>
+
+  <!-- 進行中 -->
+  <div
+    cdkDropList
+    #doingList="cdkDropList"
+    [cdkDropListData]="b.doing"
+    [cdkDropListConnectedTo]="[todoList, pendingList, doneList]"
+    class="column"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <h3>進行中</h3>
+    <div
+      *ngFor="let task of b.doing; trackBy: trackById"
+      class="task-card"
+    >
+    <app-task-icon 
+    [task]="task" 
+    (taskClick)="openEditModal($event)"
+    column="doing"></app-task-icon>
+
+    </div>
+  </div>
+
+  <!-- 完了 -->
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="b.done"
+    [cdkDropListConnectedTo]="[todoList, pendingList, doingList]"
+    class="column"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <h3>完了</h3>
+    <div
+      *ngFor="let task of b.done; trackBy: trackById"
+      class="task-card"
+    >
+    <app-task-icon 
+    [task]="task" 
+    (taskClick)="openEditModal($event)"
+    column="done"></app-task-icon>
+
+    </div>
+  </div>
+
+</div>
+
+<app-task-modal
+*ngIf="showModal && selectedTask"
+[task]="selectedTask"
+(save)="saveTask($event)"
+(delete)="deleteTask($event)"
+(close)="closeModal()"></app-task-modal>
+
+

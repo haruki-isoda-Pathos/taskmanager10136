@@ -1,0 +1,47 @@
+.task-icon {
+    position: relative;
+  }
+
+  .tooltip {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
+  }
+
+  .cdk-drag-preview {
+    opacity: 0.8;
+  }
+
+  .task-icon.yellow { 
+    background: yellow; 
+  }
+  
+  .task-icon.red { 
+    background: red; 
+  }
+
+  .task-button-transparent {
+    border: none;
+    background: transparent;
+    
+  }
