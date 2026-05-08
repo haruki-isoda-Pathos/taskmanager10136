@@ -18,7 +18,7 @@ export class TaskFormComponent {
   title: string = ""
   memo: string = ""
   deadline = ''
-  notifyBefore: number | null = null;
+  notifyAfterMinutes: number | null = null;
   priority = 1
   manualOrder?: number;
 
@@ -64,7 +64,7 @@ export class TaskFormComponent {
       title: this.title,
       memo: this.memo,
       deadline: this.deadline,
-      notifyAfterMinutes: this.notifyBefore,
+      notifyAfterMinutes: this.notifyAfterMinutes,
       priority: this.priority,
       createdAt: Date.now(),
       notified: false,

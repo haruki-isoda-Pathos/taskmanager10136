@@ -14,7 +14,7 @@ import { Task } from '../../models/task.model';
   standalone: true,
   imports: [CommonModule, DragDropModule, TaskIconComponent, TaskModalComponent],
   templateUrl: './matrix.component.html',
-  styleUrl: './matrix.component.css'
+  styleUrls: ['./matrix.component.css']
 })
 
 export class MatrixComponent implements OnInit{

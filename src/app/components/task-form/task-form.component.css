@@ -31,7 +31,7 @@ h2 {
     border: 1px solid #ccc;
     font-size: 14px;
     resize: none;        /* 手動リサイズ禁止 */
-    overflow: hidden;    /* スクロール非表示 */
+    overflow: auto;    /* スクロール非表示 */
     min-height: 60px;
   }
   

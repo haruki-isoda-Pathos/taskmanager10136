@@ -12,9 +12,9 @@
   <div class="modal">
     <p>
       タスクは期限と重要性、またはあなたの指定順に並んでいます。<br>
-      並び替えますか？
+      ここに配置しますか？
     </p>
-    <button (click)="confirmReorder()">並べ替える</button>
+    <button (click)="confirmReorder()">配置する</button>
     <button (click)="cancelReorder()">キャンセル</button>
   </div>
 </div>
@@ -115,4 +115,5 @@
 [task]="selectedTask"
 (save)="saveTask($event)"
 (remove)="removeTask($event)"
-(close)="closeModal()"></app-task-modal>
+(modalClose)="closeModal()"
+></app-task-modal>
