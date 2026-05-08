@@ -65,9 +65,6 @@ export class TaskModalComponent {
       priority: this.priority
     };
     this.save.emit(updatedTask);
-    //★おそらく、ここに通知とモーダル閉じを置くことになる。↓
-    // this.notificationService.notify("タスクを編集しました");
-    // @Output() modalClose = new EventEmitter<void>();
   }
 
   removeTask() {

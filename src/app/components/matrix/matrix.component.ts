@@ -168,17 +168,15 @@ openEditModal(task: Task) {
 
 
 saveTask(updatedTask: Task) {
-  /*
   this.taskService.updateTask(updatedTask);
   this.closeModal();
-  */
+  this.notificationService.notify("タスクを編集しました");
 }
 
 removeTask(task: Task) {
-  /*
   this.taskService.deleteTask(task.id);
   this.closeModal();
-  */
+  this.notificationService.notify("タスクを削除しました");
 }
 
 

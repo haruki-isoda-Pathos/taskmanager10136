@@ -31,4 +31,42 @@ export class TaskService {
     this.board = board;
     this.subject.next(this.board);
   }
+
+  updateTask(updatedTask: Task) {
+    const newBoard: Board = {
+      todo: this.board.todo.map(task =>
+        task.id === updatedTask.id ? updatedTask : task
+      ),
+      pending: this.board.pending.map(task =>
+        task.id === updatedTask.id ? updatedTask : task
+      ),
+      doing: this.board.doing.map(task =>
+        task.id === updatedTask.id ? updatedTask : task
+      ),
+      done: this.board.done.map(task =>
+        task.id === updatedTask.id ? updatedTask : task
+      )
+    };
+    this.board = newBoard;
+    this.subject.next(this.board);
+  }
+
+  deleteTask(taskId: string) {
+    const newBoard: Board = {
+      todo: this.board.todo.filter(task =>
+        task.id !== taskId
+      ),
+      pending: this.board.pending.filter(task =>
+        task.id !== taskId
+      ),
+      doing: this.board.doing.filter(task =>
+        task.id !== taskId
+      ),
+      done: this.board.done.filter(task =>
+        task.id !== taskId
+      )
+    };
+    this.board = newBoard;
+    this.subject.next(this.board);
+  }
 }
