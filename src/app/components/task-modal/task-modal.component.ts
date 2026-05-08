@@ -22,7 +22,7 @@ export class TaskModalComponent {
 
   @Output() save = new EventEmitter<Task>();
   
-  @Output() delete = new EventEmitter<Task>();
+  @Output() remove = new EventEmitter<Task>();
   
   @Output() close = new EventEmitter<void>();
 

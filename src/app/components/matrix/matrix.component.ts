@@ -174,7 +174,7 @@ saveTask(updatedTask: Task) {
   */
 }
 
-deleteTask(task: Task) {
+removeTask(task: Task) {
   /*
   this.taskService.deleteTask(task.id);
   this.closeModal();

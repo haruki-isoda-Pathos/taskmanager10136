@@ -37,7 +37,7 @@
     <app-task-icon 
     [task]="task" 
     (taskClick)="openEditModal($event)"
-    column="todo"></app-task-icon>
+    [column]="'todo'"></app-task-icon>
 
     </div>
   </div>
@@ -59,7 +59,7 @@
     <app-task-icon 
     [task]="task" 
     (taskClick)="openEditModal($event)"
-    column="pending"></app-task-icon>
+    [column]="'pending'"></app-task-icon>
 
     </div>
   </div>
@@ -81,7 +81,7 @@
     <app-task-icon 
     [task]="task" 
     (taskClick)="openEditModal($event)"
-    column="doing"></app-task-icon>
+    [column]="'doing'"></app-task-icon>
 
     </div>
   </div>
@@ -103,7 +103,7 @@
     <app-task-icon 
     [task]="task" 
     (taskClick)="openEditModal($event)"
-    column="done"></app-task-icon>
+    [column]="'done'"></app-task-icon>
 
     </div>
   </div>
@@ -114,7 +114,5 @@
 *ngIf="showModal && selectedTask"
 [task]="selectedTask"
 (save)="saveTask($event)"
-(delete)="deleteTask($event)"
+(remove)="removeTask($event)"
 (close)="closeModal()"></app-task-modal>
-
-
