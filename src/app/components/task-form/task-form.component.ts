@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms'
 import { TaskIconComponent } from '../task-icon/task-icon.component';
 import { BrowserNotificationService } from '../../services/browser-notification.service'
 import { TaskService } from '../../services/task.service';
+import { HistoryService } from '../../services/history.service'
 import { NotificationService } from '../../services/notification.service'
 
 @Component({
@@ -47,7 +48,8 @@ export class TaskFormComponent {
   constructor(
     private taskService: TaskService,
     private notificationService: NotificationService,
-    private browserNotificationService: BrowserNotificationService
+    private browserNotificationService: BrowserNotificationService,
+    private historyService: HistoryService
   ){}
 
   addTasks() {
@@ -75,5 +77,12 @@ export class TaskFormComponent {
     this.title = ''
     this.memo = ''
 
+    this.historyService.addHistory({
+      taskId: newTask.id,
+      taskTitle: newTask.title,
+      action: 'create',
+      detail: 'タスクを追加',
+      createdAt: new Date()
+    });
   }
 }

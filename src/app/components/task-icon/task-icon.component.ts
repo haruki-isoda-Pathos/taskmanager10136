@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HistoryService } from '../../services/history.service'
 import { Task } from '../../models/task.model';
 
 @Component({
@@ -18,6 +19,10 @@ export class TaskIconComponent {
   @Input() task!: Task;
   showHint = false;
   isDragging = false;
+
+  constructor(
+     private historyService: HistoryService
+  ) {}
 
     onMouseEnter() {
       if (!this.isDragging) {

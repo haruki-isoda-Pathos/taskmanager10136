@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
-import { TaskIconComponent } from '../task-icon/task-icon.component';
+import { Component, OnInit } from '@angular/core';
+import { HistoryService, History } from '../../services/history.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [],
+  imports:[CommonModule],
   templateUrl: './history.component.html',
-  styleUrl: './history.component.css'
+  styleUrls: ['./history.component.css']
 })
-export class HistoryComponent {
 
+export class HistoryComponent implements OnInit{
 
+histories: History[] = []
+
+constructor(
+  private historyService: HistoryService
+){}
+
+ngOnInit() {
+      this.historyService.histories$.subscribe(histories => {this.histories = histories});
+}
 
 }

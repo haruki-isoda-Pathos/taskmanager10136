@@ -7,6 +7,7 @@ import { TaskModalComponent } from '../task-modal/task-modal.component'
 import { TaskService, Board } from '../../services/task.service';
 import { BrowserNotificationService } from '../../services/browser-notification.service'
 import { NotificationService } from '../../services/notification.service'
+import { HistoryService } from '../../services/history.service'
 import { Task } from '../../models/task.model';
 
 @Component({
@@ -29,7 +30,8 @@ constructor(
   private taskService: TaskService,
   private notificationService: NotificationService,
   private cdr: ChangeDetectorRef,
-  private browserNotificationService: BrowserNotificationService
+  private browserNotificationService: BrowserNotificationService,
+  private historyService: HistoryService
 ) {}
 
 ngOnInit() {
@@ -119,6 +121,23 @@ private executeDrop(event: CdkDragDrop<Task[]>) {
       );
     }
     this.taskService.updateBoard(this.board); // 状態を更新
+
+    const columnNames: Record<string, string> = {
+      todo: '未着手',
+      pending: '保留',
+      doing: '進行中',
+      done: '完了'
+    };
+
+    const movedTask = event.container.data[event.currentIndex];
+
+    this.historyService.addHistory({
+      taskId: movedTask.id,
+      taskTitle: movedTask.title,
+      action: 'status',
+      detail: `${columnNames[event.previousContainer.id]}⇒${columnNames[event.container.id]}`,
+      createdAt: new Date()
+    });
 }
 
 trackById(index: number, task: Task) {
@@ -157,6 +176,14 @@ checkNotifications() {
           `${task.title} の期限です`
         );
         task.deadlineNotified = true;
+
+        this.historyService.addHistory({
+          taskId: task.id,
+          taskTitle: task.title,
+          action: 'deadline',
+          detail: 'タスク期限到来',
+          createdAt: new Date()
+        });
       }
     });
 }
@@ -166,17 +193,32 @@ openEditModal(task: Task) {
   this.showModal = true;
 }
 
-
 saveTask(updatedTask: Task) {
   this.taskService.updateTask(updatedTask);
   this.closeModal();
   this.notificationService.notify("タスクを編集しました");
+
+  this.historyService.addHistory({
+    taskId: updatedTask.id,
+    taskTitle: updatedTask.title,
+    action: 'edit',
+    detail: 'タスクを編集',
+    createdAt: new Date()
+  });
 }
 
 removeTask(task: Task) {
   this.taskService.deleteTask(task.id);
   this.closeModal();
   this.notificationService.notify("タスクを削除しました");
+
+  this.historyService.addHistory({
+    taskId: task.id,
+    taskTitle: task.title,
+    action: 'delete',
+    detail: 'タスクを削除',
+    createdAt: new Date()
+  });
 }
 
 

@@ -23,6 +23,7 @@
   <!-- 未着手 -->
   <div
     cdkDropList
+    id="todo"
     #todoList="cdkDropList"
     [cdkDropListData]="b.todo"
     [cdkDropListConnectedTo]="[pendingList, doingList, doneList]"
@@ -45,6 +46,7 @@
   <!-- 保留 -->
   <div
     cdkDropList
+    id="pending"
     #pendingList="cdkDropList"
     [cdkDropListData]="b.pending"
     [cdkDropListConnectedTo]="[todoList, doingList, doneList]"
@@ -67,6 +69,7 @@
   <!-- 進行中 -->
   <div
     cdkDropList
+    id="doing"
     #doingList="cdkDropList"
     [cdkDropListData]="b.doing"
     [cdkDropListConnectedTo]="[todoList, pendingList, doneList]"
@@ -89,6 +92,7 @@
   <!-- 完了 -->
   <div
     cdkDropList
+    id="done"
     #doneList="cdkDropList"
     [cdkDropListData]="b.done"
     [cdkDropListConnectedTo]="[todoList, pendingList, doingList]"

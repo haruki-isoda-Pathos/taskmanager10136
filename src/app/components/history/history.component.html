@@ -1,2 +1,16 @@
+<h2>操作・期限履歴</h2>
 
-<p>history</p>
+<div class="history-container">
+<div *ngFor="let history of histories" class="history"  [ngClass]="history.action">
+
+    <div class="detail">
+    ●{{ history.detail }}
+    </div>
+    <div class="time">
+    {{ history.createdAt | date:'MM/dd HH:mm' }} 
+    </div>
+    <div class="title">
+    タスクタイトル：{{ history.taskTitle }}
+    </div>
+</div>
+</div>

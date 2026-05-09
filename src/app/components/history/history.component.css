@@ -1,0 +1,59 @@
+h2 {
+    text-align: center;
+  }
+
+.history-container {
+    max-height: 80%;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+  .history {
+    padding: 10px;
+    margin-bottom: 8px;
+
+    border: 1px;
+    border-radius: 8px;
+
+    background-color: transparent;
+}
+
+.detail {
+    text-align: left;
+    font-size: 12px;
+    margin-bottom: 4px;
+} 
+
+.create {
+    color:#1fb3fd
+}
+
+.edit {
+    color:rgb(0, 255, 145);
+}
+
+.delete {
+    color:#f49b36;
+}
+
+.status {
+    color:#f83ae8;
+}
+
+.deadline {
+    color:#ff3232;
+}
+
+.time {
+    text-align: left;
+    font-size: 10px;
+    color: #9c9c9c;
+    margin-bottom: 4px;
+}
+
+.title {
+    text-align: left;
+    font-size: 12px;
+    color: #333333;
+}
+
