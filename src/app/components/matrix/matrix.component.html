@@ -31,6 +31,7 @@
     (cdkDropListDropped)="onDrop($event)"
   >
     <h3>未着手</h3>
+    <div class="task-list">
     <div
       *ngFor="let task of b.todo; trackBy: trackById"
       class="task-card"
@@ -39,7 +40,7 @@
     [task]="task" 
     (taskClick)="openEditModal($event)"
     [column]="'todo'"></app-task-icon>
-
+    </div>
     </div>
   </div>
 
@@ -54,6 +55,7 @@
     (cdkDropListDropped)="onDrop($event)"
   >
     <h3>保留</h3>
+    <div class="task-list">
     <div
       *ngFor="let task of b.pending; trackBy: trackById"
       class="task-card"
@@ -62,7 +64,7 @@
     [task]="task" 
     (taskClick)="openEditModal($event)"
     [column]="'pending'"></app-task-icon>
-
+    </div>
     </div>
   </div>
 
@@ -77,6 +79,7 @@
     (cdkDropListDropped)="onDrop($event)"
   >
     <h3>進行中</h3>
+    <div class="task-list">
     <div
       *ngFor="let task of b.doing; trackBy: trackById"
       class="task-card"
@@ -85,7 +88,7 @@
     [task]="task" 
     (taskClick)="openEditModal($event)"
     [column]="'doing'"></app-task-icon>
-
+    </div>
     </div>
   </div>
 
@@ -100,6 +103,7 @@
     (cdkDropListDropped)="onDrop($event)"
   >
     <h3>完了</h3>
+    <div class="task-list">
     <div
       *ngFor="let task of b.done; trackBy: trackById"
       class="task-card"
@@ -108,7 +112,7 @@
     [task]="task" 
     (taskClick)="openEditModal($event)"
     [column]="'done'"></app-task-icon>
-
+    </div>
     </div>
   </div>
 
