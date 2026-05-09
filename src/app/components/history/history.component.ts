@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class HistoryComponent implements OnInit{
 
 histories: History[] = []
+showClearConfirm: boolean = false;
 
 constructor(
   private historyService: HistoryService
@@ -22,8 +23,17 @@ ngOnInit() {
       this.historyService.histories$.subscribe(histories => {this.histories = histories});
 }
 
+confirm() {
+  this.showClearConfirm = true;
+}
+
 clearHistory() {
   this.historyService.clearHistories();
+  this.showClearConfirm = false;
+}
+
+cancelRemove() {
+  this.showClearConfirm = false;
 }
 
 }

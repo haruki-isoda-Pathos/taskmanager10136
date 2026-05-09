@@ -16,5 +16,17 @@
 </div>
 
 <div *ngIf="histories.length > 0" class="clear-button">
-    <button (click)="clearHistory()" type="button">履歴をクリア</button>
+    <button (click)="confirm()" type="button">履歴をクリア</button>
+</div>
+
+<div *ngIf="showClearConfirm" class="modal-overlay2">
+    <div class="modal2">
+      <p>
+        本当に削除しますか？
+      </p>
+      <div class="button-group">
+      <button class="btn-delete2" (click)="clearHistory()">削除</button>
+      <button class="btn-cancel" (click)="cancelRemove()">キャンセル</button>
+      </div>
+    </div>  
 </div>
