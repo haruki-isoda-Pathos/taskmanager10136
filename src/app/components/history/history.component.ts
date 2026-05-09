@@ -22,4 +22,8 @@ ngOnInit() {
       this.historyService.histories$.subscribe(histories => {this.histories = histories});
 }
 
+clearHistory() {
+  this.historyService.clearHistories();
+}
+
 }

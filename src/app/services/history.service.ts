@@ -30,4 +30,9 @@ export class HistoryService {
         this.subject.next(this.histories);
       }
 
+    clearHistories() {
+        this.histories = [];
+        this.subject.next(this.histories);
+      }
+
 }

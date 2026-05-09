@@ -1,4 +1,4 @@
-<h2>操作・期限履歴</h2>
+<h3>操作・期限履歴</h3>
 
 <div class="history-container">
 <div *ngFor="let history of histories" class="history"  [ngClass]="history.action">
@@ -13,4 +13,8 @@
     タスクタイトル：{{ history.taskTitle }}
     </div>
 </div>
+</div>
+
+<div *ngIf="histories.length > 0" class="clear-button">
+    <button (click)="clearHistory()" type="button">履歴をクリア</button>
 </div>
