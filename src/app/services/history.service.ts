@@ -20,7 +20,7 @@ export interface History {
 @Injectable({ providedIn: 'root' })
 export class HistoryService {
 
-    private histories: History[] = [] 
+    private histories: History[] = this.loadHistories();
 
     private subject = new BehaviorSubject<History[]>(this.histories);
     histories$ = this.subject.asObservable();
@@ -28,11 +28,28 @@ export class HistoryService {
     addHistory(history: History) {
         this.histories.unshift(history)
         this.subject.next(this.histories);
+        this.saveHistories()
       }
 
     clearHistories() {
         this.histories = [];
         this.subject.next(this.histories);
+        this.saveHistories()
       }
 
+    private loadHistories(): History[] {
+        const saved =
+          localStorage.getItem('histories');
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        return [];
+      }
+
+    private saveHistories() {
+        localStorage.setItem(
+          'histories',
+          JSON.stringify(this.histories)
+        );
+      }
 }

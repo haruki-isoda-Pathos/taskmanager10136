@@ -12,12 +12,7 @@ export interface Board {
 @Injectable({ providedIn: 'root' })
 export class TaskService {
 
-  private board: Board = {
-    todo: [],
-    pending: [],
-    doing: [],
-    done: []
-  };
+  private board: Board = this.loadBoard()
 
   private subject = new BehaviorSubject<Board>(this.board);
   board$ = this.subject.asObservable();
@@ -25,11 +20,13 @@ export class TaskService {
   addTask(task: Task) {
     this.board.todo.push(task);
     this.subject.next(this.board);
+    this.saveBoard()
   }
 
   updateBoard(board: Board) {
     this.board = board;
     this.subject.next(this.board);
+    this.saveBoard()
   }
 
   updateTask(updatedTask: Task) {
@@ -49,6 +46,7 @@ export class TaskService {
     };
     this.board = newBoard;
     this.subject.next(this.board);
+    this.saveBoard()
   }
 
   deleteTask(taskId: string) {
@@ -68,5 +66,29 @@ export class TaskService {
     };
     this.board = newBoard;
     this.subject.next(this.board);
+    this.saveBoard()
   }
+  
+  private loadBoard(): Board {
+    const saved =
+      localStorage.getItem('board');
+    if (saved) {
+      return JSON.parse(saved);
+    }
+    return {
+      todo: [],
+      pending: [],
+      doing: [],
+      done: []
+    };
+  }
+
+  private saveBoard() {
+    localStorage.setItem(
+      'board',
+      JSON.stringify(this.board)
+    );
+  }
+
+
 }
