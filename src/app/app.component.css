@@ -15,6 +15,7 @@ main {
 
 .matrix-area {
   flex: 0 0 48%;
+  min-width: 600px;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -26,6 +27,7 @@ main {
 
 .input-area {
     flex: 0 0 23%;
+    min-width: 287px;
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -37,6 +39,7 @@ main {
 
 .history-area {
   flex: 0 0 23%;  
+  min-width: 287px;
   background: #d1e1aabb;
   padding: 1%;
   border-radius: 3%;

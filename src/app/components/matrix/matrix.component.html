@@ -1,12 +1,25 @@
 <h2>タスク一覧</h2>
 
 <div class="legend-wrapper">
-<ul class="legend">
-  <li><span class="dot def"></span> 登録されたタスク</li>
-  <li><span class="dot yellow"></span> 通知期限が到来しているタスク</li>
-  <li><span class="dot red"></span> 期限超過しているタスク</li>
-</ul>
+  <div class="legend">
+    <div class="legend-item">
+      <span class="dot def"></span>
+      <span>登録されたタスク</span>
+    </div>
+    <div class="legend-item">
+      <span class="dot yellow"></span>
+      <span>アラームの鳴ったタスク</span>
+    </div>
+    <div class="legend-item">
+      <span class="dot red"></span>
+      <span>期限超過しているタスク</span>
+    </div>
+  </div>
 </div>
+
+<p class="legend-note">
+  ※タスクに振られた番号は優先度順
+</p>
 
 <div *ngIf="showConfirm" class="modal-overlay">
   <div class="modal">
@@ -32,6 +45,9 @@
   >
     <h3>未着手</h3>
     <div class="task-list">
+      <div class="priority-guide">
+      ↑優先<br>↓非優先
+      </div>
     <div
       *ngFor="let task of b.todo; trackBy: trackById"
       class="task-card"
@@ -56,6 +72,9 @@
   >
     <h3>保留</h3>
     <div class="task-list">
+        <div class="priority-guide">
+        ↑優先<br>↓非優先
+        </div>
     <div
       *ngFor="let task of b.pending; trackBy: trackById"
       class="task-card"
@@ -80,6 +99,9 @@
   >
     <h3>進行中</h3>
     <div class="task-list">
+      <div class="priority-guide">
+        ↑優先<br>↓非優先
+      </div>
     <div
       *ngFor="let task of b.doing; trackBy: trackById"
       class="task-card"

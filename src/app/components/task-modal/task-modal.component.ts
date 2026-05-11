@@ -50,7 +50,7 @@ export class TaskModalComponent {
   ngOnInit() {
     this.title = this.task.title;
     this.memo = this.task.memo;
-    this.deadline = this.task.deadline;
+    this.deadline = this.task.deadline ?? '';
     this.notifyAfterMinutes = this.task.notifyAfterMinutes;
     this.priority = this.task.priority;
   }

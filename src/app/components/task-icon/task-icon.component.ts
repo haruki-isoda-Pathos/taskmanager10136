@@ -49,6 +49,18 @@ export class TaskIconComponent {
     getColor(): string {
 
       if (this.column === 'done') return 'default';
+
+      if (!this.task.deadline) {
+        if (this.task.notifyAfterMinutes != null) {
+          const now = Date.now();
+          const notifyTime =
+        this.task.createdAt + this.task.notifyAfterMinutes * 60 * 1000;
+        if (now >= notifyTime) {
+        return 'yellow';
+      }
+    }
+    return 'default';
+  }
     
       const now = new Date().getTime();
       const due = new Date(this.task.deadline).getTime();

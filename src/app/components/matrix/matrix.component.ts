@@ -52,23 +52,49 @@ ngOnInit() {
        });
      }    
 
-
-
 getSortedTasks(tasks: Task[]): Task[] {
-  return tasks.sort((a, b) => {
 
-    if (a.manualOrder != null && b.manualOrder != null) {
-      return a.manualOrder - b.manualOrder;
+      const sorted = tasks.sort((a, b) => {    
+        // manualOrder優先
+        if (a.manualOrder != null && b.manualOrder != null) {
+          return a.manualOrder - b.manualOrder;
+        }
+        if (a.manualOrder != null) return -1;
+        if (b.manualOrder != null) return 1;
+        // priority優先
+        if (a.priority !== b.priority) {
+          return b.priority - a.priority;
+        }
+    
+        // deadline取得
+        const aHasDeadline = !!a.deadline;
+        const bHasDeadline = !!b.deadline;
+        // deadlineあり優先
+        if (aHasDeadline && !bHasDeadline) {
+          return -1;
+        }
+        if (!aHasDeadline && bHasDeadline) {
+          return 1;
+        }
+        // 両方deadlineあり
+        if (aHasDeadline && bHasDeadline) {
+    
+          const aDue = new Date(a.deadline!).getTime();
+          const bDue = new Date(b.deadline!).getTime();
+          if (aDue !== bDue) {
+            return aDue - bDue;
+          }
+        }
+    
+        // 最後は入力順
+        return a.createdAt - b.createdAt;
+      });
+    
+      return sorted.map((task, index) => ({
+        ...task,
+        displayIndex: index + 1
+      }));
     }
-    if (a.manualOrder != null) return -1;
-    if (b.manualOrder != null) return 1;
-
-    if(a.priority !== b.priority) {
-      return b.priority - a.priority;
-    }
-    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
-  });
-}
      
 onDrop(event: CdkDragDrop<Task[]>) {
       // 同一カラム内だけ確認したい場合
@@ -160,9 +186,9 @@ checkNotifications() {
           task.createdAt + task.notifyAfterMinutes * 60 * 1000;
         
           if (now >= notifyTime) {
-          this.notificationService.notify("通知の到来したタスクがあります");
+          this.notificationService.notify("アラームが反応しているタスクがあります");
           this.browserNotificationService.show(
-            '通知到来',
+            'アラーム',
             `${task.title} を確認してください`
           );
           task.notified = true;

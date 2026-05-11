@@ -56,7 +56,7 @@ export class TaskFormComponent {
     
     this.browserNotificationService.requestPermission();
 
-    if (!this.title || !this.deadline) {
+    if (!this.title) {
       this.notificationService.notify('必須項目を入力してください');
       return;
     }

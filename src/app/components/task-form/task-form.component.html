@@ -32,7 +32,7 @@
     </div>
   
     <div class="form-group">
-      <label>期限 ※日時ともに必須</label>
+      <label>期限</label>
       <input
         type="datetime-local"
         [(ngModel)]="deadline"
@@ -40,7 +40,7 @@
     </div>
   
     <div class="form-group">
-      <label>通知設定</label>
+      <label>アラーム</label>
       <select [(ngModel)]="notifyAfterMinutes" name="notifyAfterMinutes">
         <option [ngValue]="null">なし</option>
         <option [ngValue]="10">10分後</option>
@@ -50,6 +50,7 @@
         <option [ngValue]="360">6時間後</option>
         <option [ngValue]="720">12時間後</option>
         <option [ngValue]="1440">1日後</option>
+        <option [ngValue]="2880">2日後</option>
       </select>
     </div>
 

@@ -4,8 +4,8 @@
 
   .tooltip {
     position: absolute;
-    top: -45px;
-    left: 50%;
+    top: calc(100% + 6px);
+    left:50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.75);
     color: white;
@@ -20,7 +20,7 @@
   .tooltip::after {
     content: "";
     position: absolute;
-    bottom: -5px;
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     border-width: 5px;
