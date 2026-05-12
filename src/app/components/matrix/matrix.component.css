@@ -109,6 +109,7 @@ h2 {
   flex: 1;
   overflow-y: auto;
   min-height: 0;
+  min-width: 0;
   position: relative;
 }
 
@@ -133,8 +134,9 @@ h2 {
   margin-bottom: 10px;
   cursor: pointer;
   display: block;
+  width: 100%;
+  box-sizing: border-box;
   position: relative;
-  z-index: 1
 }
 
 

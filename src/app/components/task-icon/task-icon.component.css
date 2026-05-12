@@ -1,5 +1,7 @@
 .task-icon {
     position: relative;
+    display: block;
+    width: 100%;
   }
 
   .tooltip {
@@ -12,7 +14,11 @@
     padding: 4px 6px;
     border-radius: 6px;
     font-size: 11px;
-    white-space: nowrap;
+    width: 110px;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    line-height: 1.4;
     z-index: 1000;
     pointer-events: none;
   }
@@ -29,11 +35,17 @@
   }
 
   .cdk-drag-preview {
+    width: 100%;
     box-sizing: border-box;
+    overflow: hidden;
     border-radius: 6px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
                 0 8px 10px 1px rgba(0, 0, 0, 0.14),
                 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  .cdk-drag-preview .tooltip {
+    display: none !important;
   }
 
   .task-icon.yellow { 
@@ -49,11 +61,11 @@
   .task-button-transparent {
     border: none;
     background: transparent;
+    box-sizing: border-box;
     width: 100%;    
     height: 100%;  
     cursor: pointer;
     font-weight: bold;
-
     display: flex;
     align-items: center;
     justify-content: center;

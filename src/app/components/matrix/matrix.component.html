@@ -25,9 +25,10 @@
   <div class="modal">
     <p>
       タスクは期限と重要性、またはあなたの指定順に並んでいます。<br>
-      ここに配置しますか？
+      「{{ pendingMoveInfo?.fromTitle }}」を<br>
+      「{{ pendingMoveInfo?.toTitle }}」と入れ替えますか？
     </p>
-    <button (click)="confirmReorder()">配置する</button>
+    <button (click)="confirmReorder()">入れ替える</button>
     <button (click)="cancelReorder()">キャンセル</button>
   </div>
 </div>

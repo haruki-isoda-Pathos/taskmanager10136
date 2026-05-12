@@ -25,6 +25,10 @@ export class MatrixComponent implements OnInit{
   showConfirm = false;
   selectedTask: Task | null = null;
   showModal = false;
+  pendingMoveInfo: {
+    fromTitle: string;
+    toTitle: string;
+  } | null = null;
 
 constructor(
   private taskService: TaskService,
@@ -97,10 +101,19 @@ getSortedTasks(tasks: Task[]): Task[] {
     }
      
 onDrop(event: CdkDragDrop<Task[]>) {
+      if (event.previousContainer === event.container &&
+        event.previousIndex === event.currentIndex
+      ) { return; }
       // 同一カラム内だけ確認したい場合
       if (event.previousContainer === event.container) {
         this.pendingDrop = event;
         this.showConfirm = true;
+      const movedTask = event.previousContainer.data[event.previousIndex];
+      const targetTask = event.container.data[event.currentIndex];
+      this.pendingMoveInfo = {
+        fromTitle: movedTask.title,
+        toTitle: targetTask.title
+      };
       } else {
         // カラム移動は即実行でもOK
         this.executeDrop(event);
@@ -136,6 +149,10 @@ private executeDrop(event: CdkDragDrop<Task[]>) {
         event.previousIndex,
         event.currentIndex
       );
+
+      event.container.data.forEach((task, index) => {
+        task.manualOrder = index;
+      });
     } 
     // カラム間移動
     else {
@@ -145,6 +162,9 @@ private executeDrop(event: CdkDragDrop<Task[]>) {
         event.previousIndex,
         event.currentIndex
       );
+      event.container.data.forEach((task, index) => {
+        task.manualOrder = index;
+      });
     }
     this.taskService.updateBoard(this.board); // 状態を更新
 
