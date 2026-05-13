@@ -13,7 +13,7 @@ type="button"
 class="task-button-transparent"
 (click)="onClickTask()"
 >
-{{ task.displayIndex }}. {{ task.title }}
+{{ displayIndex }}. {{ task.title }}
 </button>
 
   <div class="tooltip" *ngIf="showHint && !isDragging">

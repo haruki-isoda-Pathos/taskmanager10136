@@ -52,6 +52,11 @@
     background: #ffd700 !important; 
     border-radius: 6px;
   }
+
+  .task-icon.orange {
+    background: #ff7e06;
+    border-radius: 6px;
+  }
   
   .task-icon.red { 
     background: #ff4d4d !important; 

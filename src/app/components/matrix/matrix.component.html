@@ -2,17 +2,22 @@
 
 <div class="legend-wrapper">
   <div class="legend">
+    タスク凡例：
     <div class="legend-item">
       <span class="dot def"></span>
-      <span>登録されたタスク</span>
+      <span>ノーマル</span>
     </div>
     <div class="legend-item">
       <span class="dot yellow"></span>
-      <span>アラームの鳴ったタスク</span>
+      <span>アラーム済</span>
+    </div>
+    <div class="legend-item">
+      <span class="dot orange"></span>
+      <span>リマインド済</span>
     </div>
     <div class="legend-item">
       <span class="dot red"></span>
-      <span>期限超過しているタスク</span>
+      <span>期限超過</span>
     </div>
   </div>
 </div>
@@ -50,11 +55,12 @@
       ↑優先<br>↓非優先
       </div>
     <div
-      *ngFor="let task of b.todo; trackBy: trackById"
+      *ngFor="let task of b.todo; let i = index; trackBy: trackById"
       class="task-card"
     >
     <app-task-icon 
     [task]="task" 
+    [displayIndex]="i + 1"
     (taskClick)="openEditModal($event)"
     [column]="'todo'"></app-task-icon>
     </div>
@@ -77,11 +83,12 @@
         ↑優先<br>↓非優先
         </div>
     <div
-      *ngFor="let task of b.pending; trackBy: trackById"
+      *ngFor="let task of b.pending; let i = index; trackBy: trackById"
       class="task-card"
     >
     <app-task-icon 
     [task]="task" 
+    [displayIndex]="i + 1"
     (taskClick)="openEditModal($event)"
     [column]="'pending'"></app-task-icon>
     </div>
@@ -104,11 +111,12 @@
         ↑優先<br>↓非優先
       </div>
     <div
-      *ngFor="let task of b.doing; trackBy: trackById"
+      *ngFor="let task of b.doing; let i = index; trackBy: trackById"
       class="task-card"
     >
     <app-task-icon 
     [task]="task" 
+    [displayIndex]="i + 1"
     (taskClick)="openEditModal($event)"
     [column]="'doing'"></app-task-icon>
     </div>
@@ -128,11 +136,12 @@
     <h3>完了</h3>
     <div class="task-list">
     <div
-      *ngFor="let task of b.done; trackBy: trackById"
+      *ngFor="let task of b.done; let i = index; trackBy: trackById"
       class="task-card"
     >
     <app-task-icon 
     [task]="task" 
+    [displayIndex]="i + 1"
     (taskClick)="openEditModal($event)"
     [column]="'done'"></app-task-icon>
     </div>

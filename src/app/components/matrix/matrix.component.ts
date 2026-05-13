@@ -94,10 +94,7 @@ getSortedTasks(tasks: Task[]): Task[] {
         return a.createdAt - b.createdAt;
       });
     
-      return sorted.map((task, index) => ({
-        ...task,
-        displayIndex: index + 1
-      }));
+      return sorted;
     }
      
 onDrop(event: CdkDragDrop<Task[]>) {
@@ -198,12 +195,11 @@ checkNotifications() {
     .forEach(task => {
       // done除外
       if (this.board.done.includes(task)) return;
-      const due =
-        new Date(task.deadline).getTime();
+      const due = task.deadline ? new Date(task.deadline).getTime() : null;
       // 通知
       if (task.notifyAfterMinutes != null && !task.notified) {
         const notifyTime =
-          task.createdAt + task.notifyAfterMinutes * 60 * 1000;
+        (task.alarmBaseTime ?? task.createdAt) + task.notifyAfterMinutes * 60 * 1000;
         
           if (now >= notifyTime) {
           this.notificationService.notify("アラームが反応しているタスクがあります");
@@ -212,10 +208,19 @@ checkNotifications() {
             `${task.title} を確認してください`
           );
           task.notified = true;
+
+          this.historyService.addHistory({
+            taskId: task.id,
+            taskTitle: task.title,
+            action: 'alarm',
+            detail: 'アラーム',
+            createdAt: new Date()
+          });
+          
         }
       }
       // 期限
-      if (now >= due && !task.deadlineNotified) {
+      if (due != null && now >= due && !task.deadlineNotified) {
         this.notificationService.notify("期限を超過したタスクがあります");
         this.browserNotificationService.show(
           '期限超過',
@@ -231,7 +236,30 @@ checkNotifications() {
           createdAt: new Date()
         });
       }
+      //　リマインド
+      if (due != null && task.notifyBefore != null && !task.reminded) {
+        const remindTime =
+          due - task.notifyBefore * 60 * 1000;
+        
+          if (now >= remindTime && now < due) {
+          this.notificationService.notify("リマインドされたタスクがあります");
+          this.browserNotificationService.show(
+            'リマインド',
+            `${task.title} を確認してください`
+          );
+          task.reminded = true;
+
+          this.historyService.addHistory({
+            taskId: task.id,
+            taskTitle: task.title,
+            action: 'remind',
+            detail: 'リマインド',
+            createdAt: new Date()
+          });
+        }
+      }
     });
+    this.taskService.persistBoard();
 }
 
 openEditModal(task: Task) {

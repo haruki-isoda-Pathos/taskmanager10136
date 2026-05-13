@@ -18,6 +18,7 @@ export class TaskModalComponent {
   memo: string = ""
   deadline = ''
   notifyAfterMinutes: number | null = null;
+  notifyBefore: number | null = null;
   priority = 1;
   showRemoveConfirm = false;
 
@@ -51,7 +52,8 @@ export class TaskModalComponent {
     this.title = this.task.title;
     this.memo = this.task.memo;
     this.deadline = this.task.deadline ?? '';
-    this.notifyAfterMinutes = this.task.notifyAfterMinutes;
+    this.notifyAfterMinutes = this.task.notifyAfterMinutes ?? null;
+    this.notifyBefore = this.task.notifyBefore ?? null;
     this.priority = this.task.priority;
   }
   
@@ -62,9 +64,20 @@ export class TaskModalComponent {
       memo: this.memo,
       deadline: this.deadline,
       notifyAfterMinutes: this.notifyAfterMinutes,
-      priority: this.priority
+      notifyBefore: this.notifyBefore,
+      priority: this.priority,
+      createdAt: Date.now(),
     };
     this.save.emit(updatedTask);
+
+    const changeAlarm = (this.task.notifyAfterMinutes != this.notifyAfterMinutes)
+    const changeDeadline = (this.task.deadline != this.deadline)
+    if (changeAlarm) {
+      this.task.alarmBaseTime = Date.now()
+      this.task.notified = false
+    }
+    if (changeDeadline) this.task.reminded = false, this.task.deadlineNotified = false
+   
   }
 
   removeTask() {

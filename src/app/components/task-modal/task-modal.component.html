@@ -41,16 +41,32 @@
       </div>
     
       <div class="form-group">
-        <label>通知設定</label>
+        <label>アラーム</label>
         <select [(ngModel)]="notifyAfterMinutes" name="notifyAfterMinutes">
           <option [ngValue]="null">なし</option>
-          <option [ngValue]="10">10分後</option>
-          <option [ngValue]="30">30分後</option>
-          <option [ngValue]="60">1時間後</option>
-          <option [ngValue]="180">3時間後</option>
-          <option [ngValue]="360">6時間後</option>
-          <option [ngValue]="720">12時間後</option>
-          <option [ngValue]="1440">1日後</option>
+          <option [ngValue]="10">いまから10分後</option>
+          <option [ngValue]="30">いまから30分後</option>
+          <option [ngValue]="60">いまから1時間後</option>
+          <option [ngValue]="180">いまから3時間後</option>
+          <option [ngValue]="360">いまから6時間後</option>
+          <option [ngValue]="720">いまから12時間後</option>
+          <option [ngValue]="1440">いまから1日後</option>
+          <option [ngValue]="2880">いまから2日後</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label>期限前リマインド</label>
+        <select [(ngModel)]="notifyBefore" name="notifyBefore" [disabled]="!deadline">
+          <option [ngValue]="null">なし</option>
+          <option [ngValue]="30">30分前に通知</option>
+          <option [ngValue]="60">60分前に通知</option>
+          <option [ngValue]="120">2時間前に通知</option>
+          <option [ngValue]="120">3時間前に通知</option>
+          <option [ngValue]="300">5時間前に通知</option>
+          <option [ngValue]="720">12時間前に通知</option>
+          <option [ngValue]="1440">1日前に通知</option>
+          <option [ngValue]="4320">3日前に通知</option>
         </select>
       </div>
   

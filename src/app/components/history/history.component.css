@@ -32,22 +32,31 @@ h3 {
     color:rgb(0, 255, 145);
 }
 
-.delete {
-    color:#f49b36;
+.remind {
+  color:rgb(255, 136, 0);
 }
 
-.status {
-    color:#f83ae8;
+.alarm {
+  color:rgb(255, 234, 0);
 }
 
 .deadline {
     color:#ff3232;
 }
 
+.delete {
+    color:#b836f4;
+}
+
+.status {
+    color:#fb6995;
+}
+
+
 .time {
     text-align: left;
     font-size: 10px;
-    color: #9c9c9c;
+    color: #747474;
     margin-bottom: 4px;
 }
 

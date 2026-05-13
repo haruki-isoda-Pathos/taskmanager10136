@@ -17,6 +17,13 @@ export class TaskService {
   private subject = new BehaviorSubject<Board>(this.board);
   board$ = this.subject.asObservable();
 
+  persistBoard() {
+    localStorage.setItem(
+      'board',
+      JSON.stringify(this.board)
+    );
+  }
+
   addTask(task: Task) {
     this.board.todo.push(task);
     this.subject.next(this.board);

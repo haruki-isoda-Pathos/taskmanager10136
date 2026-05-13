@@ -10,7 +10,9 @@ export interface History {
       | 'edit'
       | 'delete'
       | 'status'
-      | 'deadline';
+      | 'deadline'
+      | 'remind'
+      | 'alarm';
   
     detail: string;
   
